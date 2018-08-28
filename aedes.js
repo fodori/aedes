@@ -163,13 +163,13 @@ function enqueueOffline (_, done) {
   this.broker.persistence.subscriptionsByTopic(
     packet.topic,
     (err,result) => { 
-      //console.log('talalatok0:',result)
-      // { clientId: 'WEBCLIENT', topic: '/MS/1/WEBCLIENT', qos: 1 }
-      if (!!result && result instanceof Array) {
-        var newRes=result.filter(item => !(item.topic === '/MS/1/WEBCLIENT' && item.clientId === 'WEBCLIENT'))
-        result=newRes;
-      }
-      //console.log('talalatok1:',result)
+      // console.log('talalatok0:',result)
+      // // { clientId: 'WEBCLIENT', topic: '/MS/1/WEBCLIENT', qos: 1 }
+      // if (!!result && result instanceof Array) {
+      //   var newRes=result.filter(item => !(item.topic === '/MS/1/WEBCLIENT' && item.clientId === 'WEBCLIENT'))
+      //   result=newRes;
+      // }
+      // console.log('talalatok1:',result)
       enqueuer.done(err,result)
     }
   )
