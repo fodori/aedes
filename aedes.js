@@ -25,7 +25,8 @@ var defaultOptions = {
   authorizeSubscribe: defaultAuthorizeSubscribe,
   authorizeUnSubscribe: defaultAuthorizeUnSubscribe,
   authorizeForward: defaultAuthorizeForward,
-  published: defaultPublished
+  published: defaultPublished,
+  authorizeForwardFilter: defaultAuthorizeForwardFilter,
 }
 
 function Aedes (opts) {
@@ -57,6 +58,7 @@ function Aedes (opts) {
   this.authorizeUnSubscribe = opts.authorizeUnSubscribe
   this.authorizeForward = opts.authorizeForward
   this.published = opts.published
+  this.authorizeForwardFilter = opts.authorizeForwardFilter
 
   this.clients = {}
   this.brokers = {}
@@ -162,17 +164,10 @@ function enqueueOffline (_, done) {
   this.broker.persistence.subscriptionsByTopic(
     packet.topic,
     (err,result) => {
-      console.log('talalatok0:',result)
-      // { clientId: 'WEBCLIENT', topic: '/MS/1/WEBCLIENT', qos: 1 }
-      if (!!result && result instanceof Array) {
-        var newRes=result.filter(item => !(
-          item.topic.includes('/noecho')
-          && packet.topic.includes('/'+enqueuer.status.client.tenant+'/'+enqueuer.status.client.user+'/'+enqueuer.status.client.id+'/')
-        ))
-        result=newRes;
-      }
-      console.log('talalatok1:',result)
-      enqueuer.done(err,result)
+      this.broker.authorizeForwardFilter(enqueuer.status.client,result, (err1) => {
+        if (err1) { broker.emit('error', err1) }
+        enqueuer.done(err1,result)
+      })
     }
   )
 }
@@ -323,6 +318,10 @@ function defaultAuthorizeUnSubscribe (client, unsub, callback) {
 
 function defaultAuthorizeForward (client, packet) {
   return packet
+}
+
+function defaultAuthorizeForwardFilter (client, result, callback) {
+  callback(null)
 }
 
 function defaultPublished (packet, client, callback) {
