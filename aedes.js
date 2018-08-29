@@ -164,7 +164,7 @@ function enqueueOffline (_, done) {
   this.broker.persistence.subscriptionsByTopic(
     packet.topic,
     (err,result) => {
-      this.broker.authorizeForwardFilter(enqueuer.status.client,result, (err1) => {
+      this.broker.authorizeForwardFilter(enqueuer.status.client,packet,result, (err1) => {
         if (err1) { broker.emit('error', err1) }
         enqueuer.done(err1,result)
       })
@@ -320,7 +320,7 @@ function defaultAuthorizeForward (client, packet) {
   return packet
 }
 
-function defaultAuthorizeForwardFilter (client, result, callback) {
+function defaultAuthorizeForwardFilter (client, packet, result, callback) {
   callback(null)
 }
 
