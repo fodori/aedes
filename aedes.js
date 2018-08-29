@@ -159,17 +159,19 @@ function enqueueOffline (_, done) {
   enqueuer.complete = done
   enqueuer.status = this
   enqueuer.topic = packet.topic
-
   this.broker.persistence.subscriptionsByTopic(
     packet.topic,
-    (err,result) => { 
-      // console.log('talalatok0:',result)
-      // // { clientId: 'WEBCLIENT', topic: '/MS/1/WEBCLIENT', qos: 1 }
-      // if (!!result && result instanceof Array) {
-      //   var newRes=result.filter(item => !(item.topic === '/MS/1/WEBCLIENT' && item.clientId === 'WEBCLIENT'))
-      //   result=newRes;
-      // }
-      // console.log('talalatok1:',result)
+    (err,result) => {
+      console.log('talalatok0:',result)
+      // { clientId: 'WEBCLIENT', topic: '/MS/1/WEBCLIENT', qos: 1 }
+      if (!!result && result instanceof Array) {
+        var newRes=result.filter(item => !(
+          item.topic.includes('/noecho')
+          && packet.topic.includes('/'+enqueuer.status.client.tenant+'/'+enqueuer.status.client.user+'/'+enqueuer.status.client.id+'/')
+        ))
+        result=newRes;
+      }
+      console.log('talalatok1:',result)
       enqueuer.done(err,result)
     }
   )
