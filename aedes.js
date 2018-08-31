@@ -235,7 +235,6 @@ Aedes.prototype.publish = function (packet, client, done) {
     client = null
   }
   var p = new Packet(packet, this)
-  p.custom=packet.custom
   var publishFuncs = publishFuncsSimple
   if (p.qos > 0) {
     publishFuncs = publishFuncsQoS
