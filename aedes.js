@@ -146,7 +146,7 @@ function storeRetained (_, done) {
   } else {
     done()
   }
-}
+} 
 
 function emitPacket (_, done) {
   this.packet.retain = false
