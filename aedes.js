@@ -307,11 +307,11 @@ function defaultAuthorizePublish (client, packet, callback) {
   callback(null)
 }
 
-function defaultAuthorizeSubscribe (client, sub, callback) {
+function defaultAuthorizeSubscribe (client, packet, sub, callback) {
   callback(null, sub)
 }
 
-function defaultAuthorizeUnSubscribe (client, unsub, callback) {
+function defaultAuthorizeUnSubscribe (client, packet, unsub, callback) {
   callback(null, unsub)
 }
 
