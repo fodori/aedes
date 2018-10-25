@@ -26,7 +26,7 @@ var defaultOptions = {
   authorizeUnSubscribe: defaultAuthorizeUnSubscribe,
   authorizeForward: defaultAuthorizeForward,
   published: defaultPublished,
-  authorizeForwardFilter: defaultAuthorizeForwardFilter,
+  authorizeForwardFilter: defaultAuthorizeForwardFilter
 }
 
 function Aedes (opts) {
@@ -146,7 +146,7 @@ function storeRetained (_, done) {
   } else {
     done()
   }
-} 
+}
 
 function emitPacket (_, done) {
   this.packet.retain = false
@@ -163,10 +163,11 @@ function enqueueOffline (_, done) {
   enqueuer.topic = packet.topic
   this.broker.persistence.subscriptionsByTopic(
     packet.topic,
-    (err,result) => {
-      this.broker.authorizeForwardFilter(enqueuer.status.client,packet,result, (err1) => {
-        if (err1) { broker.emit('error', err1) }
-        enqueuer.done(err1,result)
+    (err, result) => {
+      if (err) { this.broker.emit('error', err); return }
+      this.broker.authorizeForwardFilter(enqueuer.status.client, packet, result, (err1) => {
+        if (err1) { this.broker.emit('error', err1); return }
+        enqueuer.done(err1, result)
       })
     }
   )

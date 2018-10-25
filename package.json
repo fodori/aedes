@@ -57,7 +57,7 @@
     "websocket-stream": "^5.1.2"
   },
   "dependencies": {
-    "aedes-packet": "^1.0.0",
+    "aedes-packet": "https://github.com/fodori/aedes-packet",
     "aedes-persistence": "^5.1.1",
     "bulk-write-stream": "^1.1.4",
     "end-of-stream": "^1.4.1",
