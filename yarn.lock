@@ -28,17 +28,13 @@ acorn@^5.5.0:
   version "5.7.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
 
-aedes-packet@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/aedes-packet/-/aedes-packet-1.0.0.tgz#2eea46f97c925b0a1f4d03f4f1fe5ef887b100f1"
-
-"aedes-packet@https://github.com/fodori/aedes-packet":
+aedes-packet@^1.0.0, "aedes-packet@https://github.com/fodori/aedes-packet":
   version "1.0.0"
   resolved "https://github.com/fodori/aedes-packet#e341f4a803f753c90f7fd10aa5620bd7e3985bbf"
 
-aedes-persistence@^5.1.1:
+"aedes-persistence@https://github.com/fodori/aedes-persistence":
   version "5.1.1"
-  resolved "https://registry.yarnpkg.com/aedes-persistence/-/aedes-persistence-5.1.1.tgz#0d92654e1d2565f68623fa898e4d7defa3cdd88b"
+  resolved "https://github.com/fodori/aedes-persistence#b877c9013aff761b12f23e3198606e8645a1a6a9"
   dependencies:
     aedes-packet "^1.0.0"
     from2 "^2.1.0"

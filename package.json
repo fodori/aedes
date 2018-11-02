@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "aedes-packet": "https://github.com/fodori/aedes-packet",
-    "aedes-persistence": "^5.1.1",
+    "aedes-persistence": "https://github.com/fodori/aedes-persistence",
     "bulk-write-stream": "^1.1.4",
     "end-of-stream": "^1.4.1",
     "fastfall": "^1.0.0",
