@@ -26,8 +26,7 @@ var defaultOptions = {
   authorizeUnSubscribe: defaultAuthorizeUnSubscribe,
   authorizeForward: defaultAuthorizeForward,
   published: defaultPublished,
-  authorizeForwardFilter: defaultAuthorizeForwardFilter,
-  afterForward: defaultAfterForward
+  authorizeForwardFilter: defaultAuthorizeForwardFilter
 }
 
 function Aedes (opts) {
@@ -60,7 +59,6 @@ function Aedes (opts) {
   this.authorizeForward = opts.authorizeForward
   this.published = opts.published
   this.authorizeForwardFilter = opts.authorizeForwardFilter
-  this.afterForward = opts.afterForward
 
   this.clients = {}
   this.brokers = {}
@@ -320,10 +318,6 @@ function defaultAuthorizeUnSubscribe (client, packet, unsub, callback) {
 
 function defaultAuthorizeForward (client, packet) {
   return packet
-}
-
-function defaultAfterForward (client, packet,callback) {
-  cb()
 }
 
 function defaultAuthorizeForwardFilter (client, packet, result, callback) {
